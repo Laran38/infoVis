@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style type="text/css" media="screen, print">
+			body  { margin: 30px 50px; font-family: sans-serif; }
+			div   { float: left; margin: 10px; }
+			table { border: 1px solid #000000; width: 12em;}
+			td    { text-align: right; padding: 0 0 0 10px; }
+			.dead  { opacity: .25; }
+			.alive { opacity: 1; fill-opacity:.01; stroke: black; }
+		</style>
+		<title>Titanic</title>
+	</head>
+	<body>
+
+		<h1>Titanic</h1>
+
+		<script src="../vendor/d3/d3.js"></script>
+		<script>
+
+var body = d3.select("body");
+
+var size_graph = {
+	x : 1000,
+	y : 800
+}
+
+var margin = {top: 10, right: 10, bottom: 20, left: 20},
+    width  = size_graph.x - margin.left - margin.right,
+    height = size_graph.y - margin.top - margin.bottom;
+
+var x = d3.scaleLinear()
+    .range([0, width]);
+
+var y = d3.scaleLinear()
+    .range([height, 0]);
+
+var s = d3.formatSpecifier("f");
+s.precision = d3.precisionFixed(0.01);
+var f = d3.format(s);
+
+var MAX_X = 100;
+var MAX_Y = 800;
+
+d3.tsv("../data/titanic.tsv", d => (
+	{
+		dataset:     d.dataset,
+		observation: d.observation,
+		x: +d.age,
+		y: +d.fare,
+		survive: +d.survived,
+		sexe : d.sex,
+	}
+)).then(function(data) {
+	x.domain([0,MAX_X]).nice();
+	y.domain([0,MAX_Y]).nice();
+
+
+
+        var svg = body.append('div').
+		append('svg')
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+
+        svg.selectAll('.row')
+				.data(data.filter(d => d.sexe === 'female' &&  d.survive == 0))
+			  	.enter().append('circle')
+				.attr('transform', d => `translate(${x(d.x)},${y(d.y)})`)
+				.attr('r', 2.8).attr('class', 'dead');
+
+        svg.selectAll('.row')
+				.data(data.filter(d => d.sexe === 'female' && d.survive == 1))
+			  	.enter().append('circle')
+				.attr('transform', d => `translate(${x(d.x)},${y(d.y)})`)
+				.attr('r', 2.8)
+				.attr('class', 'alive');
+
+        svg.selectAll('.row')
+				.data(data.filter(d => (d.sexe === 'male' && d.survive == 0)))
+			  	.enter().append('rect')
+				.attr('transform', d => `translate(${x(d.x)},${y(d.y)})`)
+				.attr('width', 5)
+				.attr('height', 5)
+				.attr('x', -2.5)
+				.attr('y', -2.5)
+				.attr('class', 'dead');
+
+        svg.selectAll('.row')
+				.data(data.filter(d => (d.sexe === 'male' && d.survive == 1)))
+			  	.enter().append('rect')
+				.attr('transform', d => `translate(${x(d.x)},${y(d.y)})`)
+				.attr('width', 5)
+				.attr('height', 5)
+				.attr('x', -2.5)
+				.attr('y', -2.5)
+				.attr('class', 'alive');
+
+
+
+
+
+        var xAxis = d3.axisBottom(x);
+        var yAxis = d3.axisLeft(y);
+
+        svg.append('g')
+            .attr('transform', `translate(0,${y(0)})`)
+            .call(xAxis.ticks(MAX_X/10).tickSize(-10));
+
+        svg.append('g')
+            .attr('transform', `translate(0,${y(0)})`)
+            .call(xAxis.ticks(MAX_X/2).tickSize(-5).tickFormat(''));
+
+        svg.append('g')
+            .attr('transform', `translate(${x(0)})`)
+            .call(yAxis.ticks(MAX_Y/100).tickSize(-10));
+
+        svg.append('g')
+            .attr('transform', `translate(${x(0)})`)
+            .call(yAxis.ticks(MAX_Y/10).tickSize(-5).tickFormat(''));
+
+});
+
+
+
+		</script>
+	</body>
+</html>
