@@ -6,14 +6,44 @@
     <title>Title</title>
 </head>
 <body>
-<p>
-TEST
-</p>
-<div id="SelectionMenu"> </div>
-<div class="box" id="hist">
 <script src="../vendor/d3/d3.js"></script>
-<script src="HistoMovies.js"></script>
+<script src="Tools.js"></script>
+<div id="histogram"></div>
+<div id="finalPanel"></div>
+
+
+<div id="SelectionMenu">
+    <select class="Ranking">
+        <option value="Metadata">MetaScore</option>
+        <option value="MS">MDB</option>
+    </select> <br>
+
+    <div class="price-slider" id="ps" ><span>from
+        <input type="number" value="2005" min="2000" max="2021"/> to
+        <input type="number" value="2007" min="2000" max="2021"/></span>
+        <input value="2005" min="2000" max="2021" step="1" type="range"/>
+        <input value="2007" min="2000" max="2021" step="1" type="range"/>
     </div>
+    <script src="Slider.js"></script>
+    <br>
+
+
+    <div id="Country"></div> <br>
+    <script src="CheckListCountry.js"></script>
+
+    <div id="Genre"></div> <br>
+
+    <button id="submit">Valider</button>
+
+    <br>
+    <h1 id="NB_res"></h1>
+</div>
+
+
+<script src="finalPanel.js"></script>
+<script src="HistoMovies.js"></script>
+
+<script src="Controler.js"></script>
 
 </body>
 </html>
