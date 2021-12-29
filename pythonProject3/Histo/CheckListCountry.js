@@ -54,18 +54,21 @@ let addElem = function (div, cb, label, RL){
 }
 
 let manageList = function (div, all_liste, liste, cn){
+    var li = document.createElement('li');
+    if (cn === countryCN)
+        li.className = "scroller";
+
+    li.style.listStyle = "none";
+    li.appendChild(document.createElement("br"));
     for (let i = 0; i < liste.length; i++){
         let courant = liste[i];
         let cb = addCheckBox(courant, cn, all_liste);
-/*        if (cn === genreCN){
-            cb.onchange = (d => d.style.font = 'black');
-        }*/
         let label = addLabel(courant);
         let RL = i % 2 ? "left" : "right";
-        addElem(div, cb, label, RL);
-        if (!((i+1) % 2))
-         div.appendChild(document.createElement("br"));
+        addElem(li, cb, label, RL);
+        li.appendChild(document.createElement("br"));
     }
+    div.appendChild(li);
 }
 
 let setListeElems = (cn, elem) => cn === genreCN ? setGenre(elem) : setCountry(elem);
@@ -107,11 +110,9 @@ let createButton = function (text, listener){
     btn.innerText = text;
     btn.addEventListener('click', listener);
     return btn;
-
 }
 
 let details = function (){
-    let div = document.getElementById("Country");
     d3.tsv("../../Data/Metadata.tsv", (function (d){
         return {
             country:country,
@@ -124,21 +125,41 @@ let details = function (){
         country = d[0].country.filter(d => d !== "" && d!=="N/A");
         genre = d[0].genre.filter(d => d !== "" && d!=="N/A");
 
+        let div = document.getElementById("Country");
+
         div.appendChild(addTitle('Country'));
-        div.appendChild(createButton('DESELECT ALL', deselectAll(all_country, countryCN)));
         div.appendChild(createButton('SELECT ALL', selectAll(all_country, countryCN)));
-        div.appendChild(document.createElement("br"));
+        let btn = createButton('DESELECT ALL', deselectAll(all_country, countryCN))
+        btn.style.float = "right"
+        div.appendChild(btn);div.appendChild(document.createElement("br"));
 
         manageList(div, all_country, country, countryCN);
 
-
+        div = document.getElementById("Genre");
         div.appendChild(addTitle('Genre'));
-        div.appendChild(createButton('DESELECT ALL', deselectAll(all_genre, genreCN)));
         div.appendChild(createButton('SELECT ALL', selectAll(all_genre, genreCN)));
+        btn = createButton('DESELECT ALL', deselectAll(all_genre, genreCN))
+        btn.style.float = "right"
+        div.appendChild(btn);
+
+
         div.appendChild(document.createElement("br"));
 
         manageList(div, all_genre, genre, genreCN);
-
     });
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

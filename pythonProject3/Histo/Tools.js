@@ -13,7 +13,7 @@ const genreCN = "LabelGenre"
 let all_country= [];
 
 let all_genre = [];
-
+//TODO changer pour fauire
 var filtrer = (d, elemAPrendre)  => {
     let to_ret = [];
     d = splitValues(d);

@@ -10,17 +10,19 @@ let histoMovie = function (){
 	if(k)
 		k.remove();
 
+	k = document.getElementById("finalPanel");
+	if(k)
+		k.remove();
 
 	const body = d3.select("body");
 	const divs = {
 		1: body.append('div').attr('id', "histogram"),
-		2: document.getElementById("NB_res")
 	};
 	 //document.getElementById("histogram").style.position = "absolute";
 
 	//define the size of the graph and the margin
-	const size_graph = {x : 1920, y : 1080},
-			margin = {top:50, bot:50, right:50, left:50 },
+	const size_graph = {x : 1250, y : 500},
+			margin = {top:50, bot:10, right:50, left:50 },
 			width = size_graph.x - margin.right - margin.left ,
 			height =  size_graph.y - margin.top - margin.bot;
 
@@ -29,16 +31,21 @@ let histoMovie = function (){
 	var f = d3.format(s);
 
 	var x = d3.scaleLinear().range([0,width]);
-	//TODO Chercher pour log
 	var y = d3.scaleLinear().range([height,0]);
 
 	d3.tsv("../../data/metadata.tsv", (function (d) {
 		return {
 			country: filtrer(d.Country, country),
 			genre: filtrer(d.Genre, genre),
+			poster: d.Poster,
 			y: (ranking === "Metadata" ? +d.Metascore : (+d.imdbRating * 10)) ,
 			x: +d.Year,
-			title: d.Title
+			title: d.Title,
+			///////////////////
+			release: d.Released,
+			runtime: d.Runtime,
+			actors: d.Actors,
+			awards: d.Awards,
 
 		};
 	})).then(function(data) {
@@ -48,13 +55,11 @@ let histoMovie = function (){
 		data = data.filter(d => d.x <= +max_year);
 		data = data.filter(d => d.x >= +min_year);
 
-		divs[2].innerText = "Number of result " + data.length;
-
-
 		var svg = divs[1]
 			.append('svg')
 			.attr("width", size_graph.x)
 			.attr("height", size_graph.y)
+
 
 		if (data.length === 0){
 			divs[1].classed("SVGerr", true);
@@ -100,17 +105,20 @@ let histoMovie = function (){
 			.attr('transform', `translate(0,${y(0)})`)
 			.call(xAxis.ticks(res.length/10).tickSize(-5).tickFormat(''));
 
+		var SVGTitle = divs[1].append('svg')
+							.attr("width", size_graph.x)
+							.attr("height", size_graph.y/10)
 
 		let scaleBar = function (d) {
 			changeSize(d3.select(this)._groups[0][0], scaleW, scaleH);
 			let title = d3.select(this)._groups[0][0].__data__.title
-			svg.append('text')
-				.attr("id", "title +" + title)
-				.attr('x', x(res.indexOf(title)) + 1)
-				.attr('y', y(-3))
-				.text(title)
-				.classed("text", true)
-				.style("font-size", "1vw");
+			SVGTitle.append('text')
+					.attr("id", "title +" + title)
+					.attr('x', x(res.indexOf(title)) + 1)
+					.attr('y', size_graph.y/10 - margin.bot)
+					.text(title)
+					.classed("text", true)
+					.style("font-size", "1vw");
 
 		}
 
@@ -140,7 +148,6 @@ let histoMovie = function (){
 			.enter()
 			.append('rect')
 			.attr('transform', d => `translate(${x(res.indexOf(d.title) + 1)}, ${y(d.y)})`)
-			//TODO problem avec width
 			.attr('width', width / (2 * res.length))
 			.attr('height', d => y(100-d.y))
 			.attr('x', -2.5)
@@ -151,6 +158,17 @@ let histoMovie = function (){
 			.on("mouseover", scaleBar)
 			.on("mouseout", scaleBarOut)
 		;
+
+
+		divs[1].append('svg')
+			.attr("width", size_graph.x)
+			.attr("height", size_graph.y/10)
+			.append('text')
+			.attr('x', size_graph.x / 2 - 100)
+			.attr('y', size_graph.y/10 - margin.bot)
+			.text(res.length + " movies found")
+			.classed("text", true)
+			.style("font-size", "1vw");
 
 
 

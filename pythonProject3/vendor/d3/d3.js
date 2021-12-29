@@ -7390,6 +7390,7 @@ var EOL = {},
     RETURN = 13;
 
 function objectConverter(columns) {
+
   return new Function("d", "return {" + columns.map(function(name, i) {
     return JSON.stringify(name) + ": d[" + i + "] || \"\"";
   }).join(",") + "}");
@@ -7397,7 +7398,9 @@ function objectConverter(columns) {
 
 function customConverter(columns, f) {
   var object = objectConverter(columns);
+
   return function(row, i) {
+
     return f(object(row), i, columns);
   };
 }
@@ -7447,10 +7450,12 @@ function dsvFormat(delimiter) {
       DELIMITER = delimiter.charCodeAt(0);
 
   function parse(text, f) {
+
     var convert, columns, rows = parseRows(text, function(row, i) {
       if (convert) return convert(row, i - 1);
       columns = row, convert = f ? customConverter(row, f) : objectConverter(row);
     });
+
     rows.columns = columns || [];
     return rows;
   }
@@ -7619,6 +7624,7 @@ function text(input, init) {
 function dsvParse(parse) {
   return function(input, init, row) {
     if (arguments.length === 2 && typeof init === "function") row = init, init = undefined;
+
     return text(input, init).then(function(response) {
       return parse(response, row);
     });
@@ -19534,6 +19540,7 @@ exports.zip = zip;
 exports.zoom = zoom;
 exports.zoomIdentity = identity$9;
 exports.zoomTransform = transform$1;
+
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
