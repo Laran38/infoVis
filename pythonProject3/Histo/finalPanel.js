@@ -29,14 +29,14 @@ let makePanel = function (ds, data, size_graph) {
 	let posText = size_graph.y/10;
 
 	let SVGtext = div.append('svg')
-		.attr("width", size_graph.x*(1-ratio_image))
+		.attr("width", size_graph.x*(1-ratio_image) - size_graph.x*0.1)
 		.attr("height", size_graph.y)
 
 
 	div.style.background = "black";
 	div.append('img')
 		.attr("src", data.poster)
-		.attr("width", size_graph.x*(ratio_image))
+		.attr("width", size_graph.x*(ratio_image) - size_graph.x*0.1)
 		.attr("height", size_graph.y)
 		.attr('float', "right")
 
