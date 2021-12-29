@@ -13,16 +13,16 @@ const genreCN = "LabelGenre"
 let all_country= [];
 
 let all_genre = [];
-//TODO changer pour fauire
+
 var filtrer = (d, elemAPrendre)  => {
     let to_ret = [];
     d = splitValues(d);
-    for(let i = 0; i < d.length; i++){
-        if(!elemAPrendre.includes(d[i])){
-            return [];
+    for(let i = 0; i < elemAPrendre.length; i++){
+        if(!d.includes(elemAPrendre[i])){
+            to_ret.push(elemAPrendre[i]);
         }
     }
-    return d;
+    return to_ret;
 }
 
 const uniqueValues = function (tsv){

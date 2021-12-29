@@ -6,16 +6,15 @@ let checked = function (choice, all_liste, cn){
         if (choice.checked){
 
             all_liste.forEach(title => {
-                if (liste.includes(title) || choice.id === title)
+                if (choice.id === title)
                     liste.push(title);
             });
         }
-
         else {
-
             liste.splice(liste.indexOf(choice.id), 1);
         }
         setListeElems(cn, liste);
+        console.log(liste)
     }
 }
 
