@@ -49,7 +49,7 @@ const uniqueValues = function (tsv){
 
     });
 }
-uniqueValues("../data/metadata.tsv");
+uniqueValues("../Data/metadata.tsv");
 let country = all_country;
 let genre = all_genre;
 

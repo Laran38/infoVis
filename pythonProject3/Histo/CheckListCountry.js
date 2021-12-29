@@ -113,7 +113,7 @@ let createButton = function (text, listener){
 }
 
 let details = function (){
-    d3.tsv("../../Data/Metadata.tsv", (function (d){
+    d3.tsv("../Data/metadata.tsv", (function (d){
         return {
             country:country,
             genre:genre,

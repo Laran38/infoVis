@@ -33,7 +33,7 @@ let histoMovie = function (){
 	var x = d3.scaleLinear().range([0,width]);
 	var y = d3.scaleLinear().range([height,0]);
 
-	d3.tsv("../../data/metadata.tsv", (function (d) {
+	d3.tsv("../Data/metadata.tsv", (function (d) {
 		return {
 			country: filtrer(d.Country, country),
 			genre: filtrer(d.Genre, genre),
