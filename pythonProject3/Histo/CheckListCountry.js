@@ -4,7 +4,6 @@ let checked = function (choice, all_liste, cn){
         let liste = cn === genreCN ? genre : country;
         console.log(choice.checked)
         if (choice.checked){
-
             all_liste.forEach(title => {
                 if (choice.id === title)
                     liste.push(title);

@@ -65,23 +65,23 @@ let makePanel = function (ds, data, size_graph) {
 			.append('text')
 			.text(d => d)
 			.classed("titleMoviePanelFinal", true)
-			.attr("transform", (d,i) => `translate(${200}, ${posText * titre.length/7 + posText + (posText + 10)/2 * (i)})`);
+			.attr("transform", (d,i) => `translate(${30}, ${posText * titre.length/7 + posText + (posText + 10)/2 * (i)})`);
 
 	SVGtext.append('text')
 		.text("Released on " + data.release)
 		.classed("textPanelFinal", true)
-		.attr("transform", `translate(${200}, ${posText * 5})`);
+		.attr("transform", `translate(${30}, ${posText * 5})`);
 
 	SVGtext.append('text')
 		.text("Duration " + data.runtime)
 		.classed("textPanelFinal", true)
-		.attr("transform", `translate(${200}, ${posText * 6})`);
+		.attr("transform", `translate(${30}, ${posText * 6})`);
 
 	SVGtext
 		.append('text')
 		.text("Starring: ")
 		.classed("textPanelFinal", true)
-		.attr("transform", `translate(${200}, ${posText * 7 })`);
+		.attr("transform", `translate(${30}, ${posText * 7 })`);
 
 
 
@@ -93,19 +93,19 @@ let makePanel = function (ds, data, size_graph) {
 			.append('text')
 			.text(d => d)
 			.classed("titlePanelFinal", true)
-			.attr("transform", (d,i) => `translate(${200}, ${posText * 7 + posText/2 +  (posText)/4 * (i - 1)})`);
+			.attr("transform", (d,i) => `translate(${30}, ${posText * 7 + posText/2 +  (posText)/4 * (i - 1)})`);
 
 	SVGtext
 		.append('text')
 		.text("Genres: ")
 		.classed("textPanelFinal", true)
-		.attr("transform", `translate(${200}, ${posText * 8 })`);
+		.attr("transform", `translate(${30}, ${posText * 8 })`);
 
 	SVGtext
 		.append('text')
 		.text(data.genre)
 		.classed("titlePanelFinal", true)
-		.attr("transform", `translate(${200}, ${posText * 8 + posText/2 })`);
+		.attr("transform", `translate(${30}, ${posText * 8 + posText/2 })`);
 
 
 	let awards = addBackSpace(data.awards, 50, " ");
@@ -117,7 +117,7 @@ let makePanel = function (ds, data, size_graph) {
 			.append('text')
 			.text(d => d)
 			.classed("textPanelFinal", true)
-			.attr("transform", (d,i) => `translate(${200}, ${posText * 9 + posText/2 +  (posText)/2 * (i - 1)})`);
+			.attr("transform", (d,i) => `translate(${30}, ${posText * 9 + posText/2 +  (posText)/2 * (i - 1)})`);
 
 	///TODO AFFICHER ELEMENT PAR DESSUS
 

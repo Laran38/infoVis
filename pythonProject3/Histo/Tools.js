@@ -18,7 +18,7 @@ var filtrer = (d, elemAPrendre)  => {
     let to_ret = [];
     d = splitValues(d);
     for(let i = 0; i < elemAPrendre.length; i++){
-        if(!d.includes(elemAPrendre[i])){
+        if(d.includes(elemAPrendre[i])){
             to_ret.push(elemAPrendre[i]);
         }
     }
