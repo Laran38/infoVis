@@ -6,6 +6,8 @@ let histoMovie = function (){
 	let max_year = elems.max_year;
 	let ranking = elems.ranking;
 
+	let nbFilms = elems.nbFilms;
+
 	let k = document.getElementById("histogram");
 	if(k)
 		k.remove();
@@ -41,7 +43,6 @@ let histoMovie = function (){
 			y: (ranking === "Metadata" ? +d.Metascore : (+d.imdbRating * 10)) ,
 			x: +d.Year,
 			title: d.Title,
-			///////////////////
 			release: d.Released,
 			runtime: d.Runtime,
 			actors: d.Actors,
@@ -61,17 +62,9 @@ let histoMovie = function (){
 			.attr("height", size_graph.y)
 
 
-		if (data.length === 0){
-			divs[1].classed("SVGerr", true);
-			svg.append('text')
-				.text("NOTHING TO DISPLAY")
-				.classed("text", true)
-				.attr("transform", `translate(${200}, ${size_graph.y / 2})`);
-			return;
-		}
-
 		let rating = {}
 		for(let index in data){
+
 			let elem = data[index];
 			let rate = elem.y;
 			let title = elem.title;
@@ -84,7 +77,21 @@ let histoMovie = function (){
 		let res = []
 		Object.keys(rating).map(function(key) {
 			rating[key].forEach(titre => res.unshift(titre));
+
 		});
+
+		res = res.slice(0, nbFilms);
+
+		data = data.filter(d => res.includes(d.title));
+
+		if (data.length === 0){
+			divs[1].classed("SVGerr", true);
+			svg.append('text')
+				.text("NOTHING TO DISPLAY")
+				.classed("text", true)
+				.attr("transform", `translate(${200}, ${size_graph.y / 2})`);
+			return;
+		}
 
 
 		svg = svg.append("g")

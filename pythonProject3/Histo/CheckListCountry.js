@@ -96,9 +96,6 @@ let selectAll = function (all_liste, cn){
             liste.push(all_checked[i].id);
         }
         setListeElems(cn, liste);
-
-
-        //console.log(document.getElementsByClassName(cn).length);
     }
 }
 
@@ -117,9 +114,6 @@ let details = function (){
             genre:genre,
         }
     })).then(function (d) {
-        //TODO Find a better way, don't know how
-        //TODO Style
-
         country = d[0].country.filter(d => d !== "" && d!=="N/A");
         genre = d[0].genre.filter(d => d !== "" && d!=="N/A");
 

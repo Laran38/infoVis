@@ -64,10 +64,12 @@ let get_elems_form = function (){
     let min_year = getDiv("ps").querySelectorAll("input[type=number]")[0].value;
     let max_year = getDiv("ps").querySelectorAll("input[type=number]")[1].value;
     let ranking = getDiv("SelectionMenu").getElementsByClassName("Ranking")[0].value;
+    let nbFilms = getDiv("nbFilms").getElementsByClassName("topMovies")[0].value;
     return {
         min_year: min_year,
         max_year: max_year,
         ranking:ranking,
+        nbFilms: nbFilms
     }
 }
 
