@@ -1,31 +1,28 @@
-let checked = function (choice, all_liste, cn){
-
+let checked = function (choice, all_list, cn){
     return function (e){
-        let liste = cn === genreCN ? genre : country;
-        console.log(choice.checked)
+        let list = cn === genreCN ? genre : country;
         if (choice.checked){
-            all_liste.forEach(title => {
+            all_list.forEach(title => {
                 if (choice.id === title)
-                    liste.push(title);
+                    list.push(title);
             });
         }
         else {
-            liste.splice(liste.indexOf(choice.id), 1);
+            list.splice(list.indexOf(choice.id), 1);
         }
-        setListeElems(cn, liste);
-        console.log(liste)
+        setListElem(cn, list);
     }
 }
 
 
 
-let addCheckBox = function ( courant, cn, all_liste) {
+let addCheckBox = function ( courant, cn, all_list) {
     let choice = document.createElement("input");
     choice.type = "checkbox";
     choice.id = courant;
     choice.checked = true;
     choice.className = cn;
-    choice.addEventListener('change', checked(choice, all_liste, cn))
+    choice.addEventListener('change', checked(choice, all_list, cn))
     return choice;
 }
 
@@ -51,16 +48,16 @@ let addElem = function (div, cb, label, RL){
     label.style.float = RL;
 }
 
-let manageList = function (div, all_liste, liste, cn){
+let manageList = function (div, all_list, list, cn){
     var li = document.createElement('li');
     if (cn === countryCN)
         li.className = "scroller";
 
     li.style.listStyle = "none";
     li.appendChild(document.createElement("br"));
-    for (let i = 0; i < liste.length; i++){
-        let courant = liste[i];
-        let cb = addCheckBox(courant, cn, all_liste);
+    for (let i = 0; i < list.length; i++){
+        let courant = list[i];
+        let cb = addCheckBox(courant, cn, all_list);
         let label = addLabel(courant);
         let RL = i % 2 ? "left" : "right";
         addElem(li, cb, label, RL);
@@ -69,33 +66,27 @@ let manageList = function (div, all_liste, liste, cn){
     div.appendChild(li);
 }
 
-let setListeElems = (cn, elem) => cn === genreCN ? setGenre(elem) : setCountry(elem);
+let setListElem = (cn, elem) => cn === genreCN ? setGenre(elem) : setCountry(elem);
 
-let deselectAll = function (all_liste, cn){
+let deselectAll = function (all_list, cn){
     return function (e){
         let all_checked = document.getElementsByClassName(cn);
         for(let i = all_checked.length - 1; i >= 0; i--){
             all_checked[i].checked = false;
         }
-        setListeElems(cn, []);
-
-
-
-
-        //console.log(document.getElementsByClassName(cn).length);
+        setListElem(cn, []);
     }
 }
 
-let selectAll = function (all_liste, cn){
-    return function (e){
-        //console.log(document.getElementsByClassName(cn));
+let selectAll = function (all_list, cn){
+    return function (e) {
         let all_checked = document.getElementsByClassName(cn);
-        let liste = [];
+        let list = [];
         for(let i = all_checked.length - 1; i >= 0; i--){
             all_checked[i].checked = true;
-            liste.push(all_checked[i].id);
+            list.push(all_checked[i].id);
         }
-        setListeElems(cn, liste);
+        setListElem(cn, list);
     }
 }
 
@@ -141,17 +132,3 @@ let details = function (){
     });
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

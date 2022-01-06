@@ -1,12 +1,12 @@
 
 let histoMovie = function (){
 		//Import values from other histogram to display
-	let elems = get_elems_form();
-	let min_year = elems.min_year;
-	let max_year = elems.max_year;
-	let ranking = elems.ranking;
+	let elem = get_elem_form();
+	let min_year = elem.min_year;
+	let max_year = elem.max_year;
+	let ranking = elem.ranking;
 
-	let nbFilms = elems.nbFilms;
+	let nbFilms = elem.nbFilms;
 
 	let k = document.getElementById("histogram");
 	if(k)
@@ -23,7 +23,7 @@ let histoMovie = function (){
 	 //document.getElementById("histogram").style.position = "absolute";
 
 	//define the size of the graph and the margin
-	const size_graph = {x : 1250, y : 500},
+	const size_graph = {x : 950, y : 500},
 			margin = {top:50, bot:10, right:50, left:50 },
 			width = size_graph.x - margin.right - margin.left ,
 			height =  size_graph.y - margin.top - margin.bot;
@@ -85,11 +85,11 @@ let histoMovie = function (){
 		data = data.filter(d => res.includes(d.title));
 
 		if (data.length === 0){
-			divs[1].classed("SVGerr", true);
+			divs[1].classed("SVGErr", true);
 			svg.append('text')
 				.text("NOTHING TO DISPLAY")
 				.classed("text", true)
-				.attr("transform", `translate(${200}, ${size_graph.y / 2})`);
+				.attr("transform", `translate(${75}, ${size_graph.y / 2})`);
 			return;
 		}
 
@@ -176,10 +176,6 @@ let histoMovie = function (){
 			.text(res.length + " movies found")
 			.classed("text", true)
 			.style("font-size", "1vw");
-
-
-
-
 
 	});
 

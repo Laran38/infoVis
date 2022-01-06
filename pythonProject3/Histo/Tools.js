@@ -1,7 +1,7 @@
 /*
  *
  * This file is only use to collect information from the second div, like the min year, max year, ...
- * These variables are then exported to be collected in the other files, and then use for filter informations
+ * These variables are then exported to be collected in the other files, and then use for filter information
  *
  */
 const splitValues = values => values.split(", ");
@@ -14,15 +14,15 @@ let all_country= [];
 
 let all_genre = [];
 
-var filtrer = (d, elemAPrendre)  => {
+var filtrer = (d, elemToTake)  => {
     let to_ret = [];
     d = splitValues(d);
-    for(let i = 0; i < elemAPrendre.length; i++){
-        if(d.includes(elemAPrendre[i])){
-            to_ret.push(elemAPrendre[i]);
+    for(let i = 0; i < elemToTake.length; i++){
+        if(d.includes(elemToTake[i])){
+            to_ret.push(elemToTake[i]);
         }
     }
-    return to_ret;
+    return to_ret.length === 0 ? [] : d;
 }
 
 const uniqueValues = function (tsv){
@@ -41,8 +41,6 @@ const uniqueValues = function (tsv){
             data[i].genre.forEach(c => {
                             if (!all_genre.includes(c))
                                                     all_genre.push(c.toString());});
-
-
         }
         all_country = all_country.filter(d => d !== "" && d!=="N/A");
         all_genre = all_genre.filter(d => d !== "" && d!=="N/A");
@@ -59,7 +57,7 @@ let setCountry = l => country = l;
 
 
 
-let get_elems_form = function (){
+let get_elem_form = function (){
     let getDiv = (id) => document.getElementById(id);
     let min_year = getDiv("ps").querySelectorAll("input[type=number]")[0].value;
     let max_year = getDiv("ps").querySelectorAll("input[type=number]")[1].value;
@@ -75,7 +73,3 @@ let get_elems_form = function (){
 
 //Todo gerer plus belles couleurs
 let cScale = d3.schemeSet1 .concat(d3.schemeSet2.concat(d3.schemeSet3));
-
-
-
-
