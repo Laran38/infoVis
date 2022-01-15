@@ -72,4 +72,4 @@ let get_elem_form = function (){
 }
 
 //Todo gerer plus belles couleurs
-let cScale = d3.schemeSet1 .concat(d3.schemeSet2.concat(d3.schemeSet3));
+let cScale = d3.schemeSet1.concat(d3.schemeSet2.concat(d3.schemeSet3));

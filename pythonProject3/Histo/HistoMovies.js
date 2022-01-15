@@ -143,7 +143,6 @@ let histoMovie = function (){
 		}
 
 		let getColor = function (dg){
-			//TODO Gerer plusieurs couleurs
 			dg = dg[0];
 			let index = all_genre.indexOf(dg);
 			return cScale[index];

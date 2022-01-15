@@ -22,6 +22,19 @@ let addCheckBox = function ( courant, cn, all_list) {
     choice.id = courant;
     choice.checked = true;
     choice.className = cn;
+
+
+    choice.style.width = "12px";
+    choice.style.height = "12px";
+    choice.style.opacity = "0";
+    if (cn === genreCN){
+        console.log(cn)
+
+        var styleElem = document.head.appendChild(document.createElement("style"));
+        couleur = cScale[all_genre.indexOf(courant)]
+        styleElem.innerHTML = "#"+courant+" + label:before {background-color:"+ couleur+ "}";
+    }
+
     choice.addEventListener('change', checked(choice, all_list, cn))
     return choice;
 }
@@ -30,7 +43,7 @@ let addCheckBox = function ( courant, cn, all_list) {
 let addLabel = function (courant){
     let label = document.createElement("label")
     label.innerText = courant;
-
+    label.className = "LabelGenre";
     return label;
 }
 
@@ -41,11 +54,23 @@ let addTitle = function (title){
     return hG;
 }
 
-let addElem = function (div, cb, label, RL){
+let addElem = function (div, cb, label, cn){
     div.appendChild(cb);
     div.appendChild(label);
-    cb.style.float = RL;
-    label.style.float = RL;
+    if(cn === genreCN){
+        label.style.position = "absolute"
+        label.style.zIndex = "-1";
+        cb.style.float = "left";
+        label.style.float = "right";
+        cb.style.position = "absolute"
+        label.style.position = "absolute"
+    }
+    else {
+        cb.style.opacity = "100";
+        label.className = cn;
+    }
+
+
 }
 
 let manageList = function (div, all_list, list, cn){
@@ -60,7 +85,8 @@ let manageList = function (div, all_list, list, cn){
         let cb = addCheckBox(courant, cn, all_list);
         let label = addLabel(courant);
         let RL = i % 2 ? "left" : "right";
-        addElem(li, cb, label, RL);
+
+        addElem(li, cb, label, cn);
         li.appendChild(document.createElement("br"));
     }
     div.appendChild(li);
@@ -114,7 +140,8 @@ let details = function (){
         div.appendChild(createButton('SELECT ALL', selectAll(all_country, countryCN)));
         let btn = createButton('DESELECT ALL', deselectAll(all_country, countryCN))
         btn.style.float = "right"
-        div.appendChild(btn);div.appendChild(document.createElement("br"));
+        div.appendChild(btn);
+        div.appendChild(document.createElement("br"));
 
         manageList(div, all_country, country, countryCN);
 
@@ -126,7 +153,7 @@ let details = function (){
         div.appendChild(btn);
 
 
-        div.appendChild(document.createElement("br"));
+        //div.appendChild(document.createElement("br"));
 
         manageList(div, all_genre, genre, genreCN);
     });
