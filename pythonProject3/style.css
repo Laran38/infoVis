@@ -3,21 +3,74 @@ body{
   position: relative;
   align-items: center;
   justify-items: center;
+  background-color: #222a41;
+}
+
+div {
+  color: #222a41;
+}
+
+h2 {
+  font-family: 'OCR A Std', monospace;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+label {
+  font-family: 'OCR A Std', monospace;
+  font-weight: 100;
+  font-style: oblique;
+  color: white;
+  padding: 10px;
+
+}
+
+.elements{
+    font-family: 'OCR A Std', monospace;
+  font-weight: 100;
+  font-style: oblique;
+  color: white;
+}
+select {
+  background-color: #aba6a6;
+  color: #FFFFFF;
+  font-family: 'OCR A Std', monospace;
+  font-style: oblique;
+}
+
+button{
+  cursor: pointer;
+  background-color: #aba6a6;
+  color: white;
+  font-family: 'OCR A Std', monospace;
+  font-style: oblique;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 9px;
+  transition: 1s;
+}
+
+button:hover{
+  color: black;
+  background-color: #FFFFFF;
+
 }
 
 
+
 .SVGErr {
-  background: white;
+  background: transparent;
   text-align: center;
   justify-content: center;
 
   color: #e60023;
 }
 
+
 .text{
   font-size: 5vw;
-  background: red;
-
+  color: #FFFFFF;
 }
 
 .scroller {
@@ -67,6 +120,10 @@ input[type=number] {
   text-align: center;
   font-size: 1em;
   -moz-appearance: textfield;
+    background-color: #aba6a6;
+  color: #FFFFFF;
+  font-family: 'OCR A Std', monospace;
+  font-style: oblique;
 }
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
@@ -168,12 +225,34 @@ input[type=range]::-ms-thumb {
  * Checkbox Part
  */
 
-input[type="checkbox"] + label {
-  border: 1px solid transparent;
+.LabelGenre {
+  display: inline-block;
+  position: relative;
+  padding-left: 25px;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 5px;
 }
-input[type="checkbox"]:checked {
-  color: red;
+
+.LabelGenre:before {
+  line-height: 20px;
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 0;
+  border: 1px solid #666666;
 }
+
+input[type=checkbox]:checked + .LabelGenre:before,
+.LabelGenre:hover:before {
+  content: "\2713";
+  color: #000000;
+  text-align: center;
+  line-height: 16px;
+}
+
 
 /*
  * Final panel Part
@@ -205,3 +284,4 @@ input[type="checkbox"]:checked {
 .titlePanelFinal{
    font-size: 1vw;
 }
+

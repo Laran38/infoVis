@@ -62,23 +62,24 @@ let makePanel = function (ds, data, size_graph) {
 			.append('text')
 			.text(d => d)
 			.classed("titleMoviePanelFinal", true)
-			.attr("transform", (d,i) => `translate(${20}, ${posText / titre.length + posText + (posText+10)/2 * (i*1.1)})`);
+			.attr("transform", (d,i) => `translate(${20}, ${posText / titre.length + posText + (posText+10)/2 * (i*1.1)})`)
+	.style('fill', "white");
 
 	SVGText.append('text')
 		.text("Released on " + data.release)
 		.classed("textPanelFinal", true)
-		.attr("transform", `translate(${30}, ${posText * 5})`);
+		.attr("transform", `translate(${30}, ${posText * 5})`).style('fill', "white");
 
 	SVGText.append('text')
 		.text("Duration " + data.runtime)
 		.classed("textPanelFinal", true)
-		.attr("transform", `translate(${30}, ${posText * 5.75})`);
+		.attr("transform", `translate(${30}, ${posText * 5.75})`).style('fill', "white");
 
 	SVGText
 		.append('text')
 		.text("Starring: ")
 		.classed("textPanelFinal", true)
-		.attr("transform", `translate(${30}, ${posText * 6.5 })`);
+		.attr("transform", `translate(${30}, ${posText * 6.5 })`).style('fill', "white");
 
 
 
@@ -90,13 +91,13 @@ let makePanel = function (ds, data, size_graph) {
 			.append('text')
 			.text(d => d)
 			.classed("titlePanelFinal", true)
-			.attr("transform", (d,i) => `translate(${30}, ${posText * 6.5 + posText/3 +  (posText)/4 * (i)})`);
+			.attr("transform", (d,i) => `translate(${30}, ${posText * 6.5 + posText/3 +  (posText)/4 * (i)})`).style('fill', "white");
 
 	SVGText
 		.append('text')
 		.text("Genres: ")
 		.classed("textPanelFinal", true)
-		.attr("transform", `translate(${30}, ${posText * 8 })`);
+		.attr("transform", `translate(${30}, ${posText * 8 })`).style('fill', "white");
 
 	let genres = addBackSpace(data.genre.toString(), 50, ",");
 
@@ -104,7 +105,7 @@ let makePanel = function (ds, data, size_graph) {
 		.append('text')
 		.text(genres)
 		.classed("titlePanelFinal", true)
-		.attr("transform", `translate(${30}, ${posText * 8 + posText/3 })`);
+		.attr("transform", `translate(${30}, ${posText * 8 + posText/3 })`).style('fill', "white");
 
 
 	let awards = addBackSpace(data.awards, 50, " ");
@@ -115,6 +116,6 @@ let makePanel = function (ds, data, size_graph) {
 			.append('text')
 			.text(d => d)
 			.classed("textPanelFinal", true)
-			.attr("transform", (d,i) => `translate(${30}, ${posText * 9.5 + posText/2 +  (posText)/2 * (i - 1)})`);
+			.attr("transform", (d,i) => `translate(${30}, ${posText * 9.5 + posText/2 +  (posText)/2 * (i - 1)})`).style('fill', "white");
 }
 

@@ -54,16 +54,16 @@ let addTitle = function (title){
     return hG;
 }
 
-let addElem = function (div, cb, label, cn){
+let addElem = function (div, cb, label, cn, RL){
     div.appendChild(cb);
     div.appendChild(label);
+
     if(cn === genreCN){
         label.style.position = "absolute"
         label.style.zIndex = "-1";
-        cb.style.float = "left";
-        label.style.float = "right";
+        cb.style.float = RL % 2 === 0 ? "left" : "right";
+        label.style.float = RL % 2 === 0 ? "right" : "left";
         cb.style.position = "absolute"
-        label.style.position = "absolute"
     }
     else {
         cb.style.opacity = "100";
@@ -79,14 +79,14 @@ let manageList = function (div, all_list, list, cn){
         li.className = "scroller";
 
     li.style.listStyle = "none";
-    li.appendChild(document.createElement("br"));
+    //li.appendChild(document.createElement("br"));
     for (let i = 0; i < list.length; i++){
         let courant = list[i];
         let cb = addCheckBox(courant, cn, all_list);
         let label = addLabel(courant);
-        let RL = i % 2 ? "left" : "right";
-
-        addElem(li, cb, label, cn);
+        let divc = document.createElement('div');
+        addElem(divc, cb, label, cn, i);
+        li.appendChild(divc);
         li.appendChild(document.createElement("br"));
     }
     div.appendChild(li);
@@ -121,6 +121,7 @@ let createButton = function (text, listener){
     let btn = document.createElement('button');
     btn.innerText = text;
     btn.addEventListener('click', listener);
+    btn.className = "btn";
     return btn;
 }
 
@@ -137,8 +138,8 @@ let details = function (){
         let div = document.getElementById("Country");
 
         div.appendChild(addTitle('Country'));
-        div.appendChild(createButton('SELECT ALL', selectAll(all_country, countryCN)));
-        let btn = createButton('DESELECT ALL', deselectAll(all_country, countryCN))
+        div.appendChild(createButton('Select all', selectAll(all_country, countryCN)));
+        let btn = createButton('Deselect all', deselectAll(all_country, countryCN))
         btn.style.float = "right"
         div.appendChild(btn);
         div.appendChild(document.createElement("br"));
@@ -147,8 +148,8 @@ let details = function (){
 
         div = document.getElementById("Genre");
         div.appendChild(addTitle('Genre'));
-        div.appendChild(createButton('SELECT ALL', selectAll(all_genre, genreCN)));
-        btn = createButton('DESELECT ALL', deselectAll(all_genre, genreCN))
+        div.appendChild(createButton('Select all', selectAll(all_genre, genreCN)));
+        btn = createButton('Deselect all', deselectAll(all_genre, genreCN))
         btn.style.float = "right"
         div.appendChild(btn);
 

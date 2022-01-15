@@ -86,10 +86,12 @@ let histoMovie = function (){
 
 		if (data.length === 0){
 			divs[1].classed("SVGErr", true);
+
 			svg.append('text')
 				.text("NOTHING TO DISPLAY")
 				.classed("text", true)
-				.attr("transform", `translate(${75}, ${size_graph.y / 2})`);
+				.attr("transform", `translate(${75}, ${size_graph.y / 2})`)
+				.style('fill', "white");
 			return;
 		}
 
@@ -98,19 +100,23 @@ let histoMovie = function (){
 			.attr("transform", `translate(${margin.left},${margin.top})`)
 
 
-		x.domain([0, res.length ]).nice();
+
+		x.domain([0, res.length + 2]).nice();
 		y.domain([0,100]).nice();
 		var xAxis = d3.axisBottom(x);
 		var yAxis = d3.axisLeft(y);
 
+		//xAxis.style('fill', "white");
 
 		svg.append('g')
 			.attr('transform', `translate(${x(0)})`)
-			.call(yAxis.ticks(100/10).tickSize(5));
+			.attr("color", "white")
+			.call(yAxis.ticks(100/10).tickSize(5))
 
 		svg.append('g')
 			.attr('transform', `translate(0,${y(0)})`)
-			.call(xAxis.ticks(res.length/10).tickSize(-5).tickFormat(''));
+			.attr("color", "white")
+			.call(xAxis.ticks(res.length/10).tickSize(-5).tickFormat(''))
 
 		var SVGTitle = divs[1].append('svg')
 							.attr("width", size_graph.x)
@@ -125,7 +131,8 @@ let histoMovie = function (){
 					.attr('y', size_graph.y/10 - margin.bot)
 					.text(title)
 					.classed("text", true)
-					.style("font-size", "1vw");
+					.style("font-size", "1vw")
+					.style('fill', "white")
 
 		}
 
@@ -166,15 +173,17 @@ let histoMovie = function (){
 		;
 
 
-		divs[1].append('svg')
+		svg2 = divs[1].append('svg')
 			.attr("width", size_graph.x)
 			.attr("height", size_graph.y/10)
-			.append('text')
+			.style("background-color", '#222a41');
+
+			svg2.append('text')
 			.attr('x', size_graph.x / 2 - 100)
 			.attr('y', size_graph.y/10 - margin.bot)
 			.text(res.length + " movies found")
-			.classed("text", true)
-			.style("font-size", "1vw");
+			.style("font-size", "1vw")
+			.style('fill', "white")
 
 	});
 

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../style.css">
+    <link href="http://fonts.cdnfonts.com/css/american-typewriter" rel="stylesheet">
     <title>Title</title>
 </head>
 <body>
@@ -17,20 +18,20 @@
     <script src="CheckListCountry.js"></script>
 
 </div>
-<div id="SelectionMenu" style="padding: 20px; child-align: middle">
-    The score depend on:
+<div id="SelectionMenu" style="padding: 20px; child-align: middle; font-family: 'OCR A Std;', monospace; color:white">
+    Scores:
     <select class="Ranking" style="float: right">
-        <option value="Metadata">MetaScore</option>
-        <option value="MS">MDB</option>
+        <option value="Metadata" >MetaScore</option>
+        <option value="MS" >MDB</option>
     </select>
     <br>
 
-    <div class="price-slider" id="nbFilms"><span>
+    <div class="price-slider" id="nbFilms" style="color:white"><span>
        Top  <input type="number" value="100" style="width: 100px" class="topMovies" min="0"/> movies</span>
 
     </div>
 
-    <div class="price-slider" id="ps" ><span>from
+    <div class="price-slider" id="ps" style="color:white" ><span>from
         <input type="number" value="2005" min="2000" max="2021"/> to
         <input type="number" value="2007" min="2000" max="2021"/></span>
         <input value="2005" min="2000" max="2021" step="1" type="range"/>
@@ -40,6 +41,7 @@
     <script src="Slider.js"></script>
 
     <div id="Genre"></div>
+    <br>
 
     <button id="submit">Submit</button>
 </div>

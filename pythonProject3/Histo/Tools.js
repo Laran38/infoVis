@@ -5,7 +5,7 @@
  *
  */
 const splitValues = values => values.split(", ");
-const scaleW = 2, scaleH = 1.1;
+const scaleW = 1.3, scaleH = 1.1;
 const countryCN = "LabelCountry"
 const genreCN = "LabelGenre"
 
