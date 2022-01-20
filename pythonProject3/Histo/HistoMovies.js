@@ -176,7 +176,7 @@ let histoMovie = function (){
 		svg2 = divs[1].append('svg')
 			.attr("width", size_graph.x)
 			.attr("height", size_graph.y/10)
-			.style("background-color", '#222a41');
+			.style("background-color", 'transparent');
 
 			svg2.append('text')
 			.attr('x', size_graph.x / 2 - 100)

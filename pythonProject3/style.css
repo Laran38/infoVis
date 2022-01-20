@@ -3,30 +3,27 @@ body{
   position: relative;
   align-items: center;
   justify-items: center;
-  background-color: #222a41;
+  background-color: #2b2b2c;
 }
 
 div {
   color: #222a41;
+  margin: 3px;
 }
 
 h2 {
-  font-family: 'OCR A Std', monospace;
   font-weight: 700;
   color: #FFFFFF;
 }
 
 label {
-  font-family: 'OCR A Std', monospace;
   font-weight: 100;
   font-style: oblique;
   color: white;
-  padding: 10px;
 
 }
 
 .elements{
-    font-family: 'OCR A Std', monospace;
   font-weight: 100;
   font-style: oblique;
   color: white;
@@ -34,25 +31,23 @@ label {
 select {
   background-color: #aba6a6;
   color: #FFFFFF;
-  font-family: 'OCR A Std', monospace;
   font-style: oblique;
 }
 
 button{
-  cursor: pointer;
-  background-color: #aba6a6;
-  color: white;
-  font-family: 'OCR A Std', monospace;
-  font-style: oblique;
-  padding: 5px 5px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 9px;
-  transition: 1s;
+    background: linear-gradient(#1da1f2, #12699E);
+    color: white;
+    font-style: oblique;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 9px;
+    transition: 1s;
 }
 
 button:hover{
   color: black;
+  cursor: pointer;
   background-color: #FFFFFF;
 
 }
@@ -74,6 +69,7 @@ button:hover{
 }
 
 .scroller {
+  margin-top: 20px;
   width: 250px;
   height: 500px;
   overflow-y: scroll;
